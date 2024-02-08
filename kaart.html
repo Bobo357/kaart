@@ -9,8 +9,7 @@
         #map-canvas { height: 100%; }
         html, body { height: 100%; margin: 0; padding: 0; }
 </style>
-<script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7dSg4pUYKelOu5ZaaLMOvf7oO                                                                                                                                                            hPwtMJU&v=3.28&libraries=geometry"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7dSg4pUYKelOu5ZaaLMOvf7oOhPwtMJU&v=3.28&libraries=geometry"></script>
 <script type="text/javascript" src=maplabel-compiled.js></script>
 <script type="text/javascript">
 var map;
@@ -20,9 +19,9 @@ var cols=["black","green","black","red","blue","purple","white","yellow"]
 rectcolors = [
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,1,0,0],
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,                                                                                                                                                            2],
-        [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,                                                                                                                                                            1],
-        [0,0,0,0,0,0,0,0,0,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2]                                                                                                                                                            ,
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,2],
+        [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1],
+        [0,0,0,0,0,0,0,0,0,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2],
         [0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [0,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
         [0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
@@ -50,14 +49,14 @@ function initialize() {
         lat = 59.4142;
         lon = 24.7387;
         var x = new google.maps.LatLng(lat, lon);
-        latinc = google.maps.geometry.spherical.computeOffset(x, 10000, 0).lat()                                                                                                                                                             - lat;
-        loninc = google.maps.geometry.spherical.computeOffset(x, 10000, 90).lng()                                                                                                                                                             - lon;
+        latinc = google.maps.geometry.spherical.computeOffset(x, 10000, 0).lat() - lat;
+        loninc = google.maps.geometry.spherical.computeOffset(x, 10000, 90).lng() - lon;
         var myOptions = {
                 zoom: 8,
-                center: google.maps.geometry.spherical.computeOffset(x, 75000, 18                                                                                                                                                            0),
+                center: google.maps.geometry.spherical.computeOffset(x, 75000, 180),
                 mapTypeId: google.maps.MapTypeId.HYBRID
                 };
-        map = new google.maps.Map(document.getElementById("map-canvas"), myOption                                                                                                                                                            s);
+        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
         var circle = new google.maps.Circle({
                 strokeColor: "white", strokeOpacity: 0.8,
                 strokeWeight: 0.8, fillOpacity: 0, map: map,
@@ -81,7 +80,7 @@ function initialize() {
         drawRects();
         var mapLabel = new MapLabel({
                 text: green + '/' + total,
-                position: google.maps.geometry.spherical.computeOffset(x, 75000,                                                                                                                                                             280),
+                position: google.maps.geometry.spherical.computeOffset(x, 75000, 280),
                 fontSize: 16, fontColor: "white", strokeWeight: 0,
                 map: map
         });
@@ -103,7 +102,7 @@ function drawRects () {
                                 var rectangle = new google.maps.Rectangle();
                                 var rectOptions = {
                                         strokeColor: "white", strokeOpacity: 0.8,
-                                        strokeWeight: 0.4, fillColor: cols[rectco                                                                                                                                                            lors[i][a]],
+                                        strokeWeight: 0.4, fillColor: cols[rectcolors[i][a]],
                                         fillOpacity: 0.2, map: map,
                                         bounds: {
                                                 north: latx,
